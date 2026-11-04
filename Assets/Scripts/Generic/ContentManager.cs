@@ -19,6 +19,50 @@
             }
         }
 
+        /// <summary>
+        /// Managers
+        /// </summary>
+        public InputManager Input { get; private set; }
+        public PlayerManager Player { get; private set; }
+        public CameraManager Camera { get; private set; }
+        public UIManager UI { get; private set; }
+        public PauseManager Pause { get; private set; }
+
+        public void RegisterManager<T>(T comp) where T : Component
+        {
+            switch (comp)
+            {
+                case InputManager input:
+                    Input = input;
+                    break;
+
+                case PlayerManager player:
+                    Player = player;
+                    break;
+
+                case CameraManager camera:
+                    Camera = camera;
+                    break;
+
+                case UIManager ui:
+                    UI = ui;
+                    break;
+
+                case PauseManager pause:
+                    Pause = pause;
+                    break;
+
+                case null:
+                    Debug.LogError("Tried to register a null manager.");
+                    break;
+
+                default:
+                    Debug.LogError($"Manager {comp.GetType().Name} was not recognized.");
+                    break;
+            }
+        }
+
+
         public Prefabs prefabs;
 
         private void Awake()

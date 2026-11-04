@@ -10,17 +10,15 @@
         private PlayerManager _playerManager;
         private Player _currentPlayer;
         private CameraManager _cameraManager;
-        private PauseManager _pauseManager => ValueManager.Instance.Pause;
+        private PauseManager _pauseManager => ContentManager.Instance.Pause;
         private Vector2 _lookPosition;
-
-        private float _currentScrollInputCooldown;
 
         private void Awake()
         {
-            ValueManager.Instance.RegisterManager<InputManager>(this);
-            _playerManager = ValueManager.Instance.Player;
+            ContentManager.Instance.RegisterManager<InputManager>(this);
+            _playerManager = ContentManager.Instance.Player;
             _currentPlayer = _playerManager.GetCurrentPlayer();
-            _cameraManager = ValueManager.Instance.Camera;
+            _cameraManager = ContentManager.Instance.Camera;
         }
 
         public void Update()
@@ -31,7 +29,6 @@
             var mouseX = Input.GetAxisRaw("Mouse X") * SettingsManager.MOUSE_SENSITIVITY;
             var mouseY = Input.GetAxisRaw("Mouse Y") * SettingsManager.MOUSE_SENSITIVITY;
             _lookPosition = new Vector2(mouseX, mouseY);
-            _cameraManager.UpdateCameraRotation(_lookPosition);
         }
 
         private void HandleCooldowns()

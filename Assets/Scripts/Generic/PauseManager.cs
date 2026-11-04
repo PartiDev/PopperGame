@@ -12,12 +12,7 @@
 
         private UIManager _uiManager;
         private PlayerManager _playerManager;
-
-        private void Awake()
-        {
-            ValueManager.Instance.RegisterManager<PauseManager>(this);
-        }
-
+        
         public void Update()
         {
             HandleCooldowns();
@@ -44,10 +39,10 @@
         public void TogglePauseGame()
         {
             if (_uiManager == null)
-                _uiManager = ValueManager.Instance.UI;
+                _uiManager = ContentManager.Instance.UI;
 
             if (_playerManager == null)
-                _playerManager = ValueManager.Instance.Player;
+                _playerManager = ContentManager.Instance.Player;
 
             if (CanPause())
             {

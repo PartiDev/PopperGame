@@ -14,13 +14,13 @@
         [Header("Pause")]
         [SerializeField] private GameObject _pausePanel;
 
-        private PauseManager _pauseManager => ValueManager.Instance.Pause;
+        private PauseManager _pauseManager => ContentManager.Instance.Pause;
 
         private PlayerManager _playerManager;
 
         private void Awake()
         {
-            ValueManager.Instance.RegisterManager<UIManager>(this);
+            ContentManager.Instance.RegisterManager<UIManager>(this);
         }
 
         private void Update()

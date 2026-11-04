@@ -3,6 +3,7 @@ namespace Assets.Scripts.Generic
     using UnityEngine;
     using UnityEngine.SceneManagement;
     using Player;
+    using Helpers;
 
     public enum CurrentScene { Menu, MainGame }
 
@@ -71,11 +72,26 @@ namespace Assets.Scripts.Generic
         private void InstantiateManagers()
         {
             // Order is important !
-            Instantiate(ContentManager.Instance.prefabs.managerPrefabs.pauseManager_P);
-            Instantiate(ContentManager.Instance.prefabs.managerPrefabs.uiManager_P);
-            Instantiate(ContentManager.Instance.prefabs.managerPrefabs.playerManager_P);
-            Instantiate(ContentManager.Instance.prefabs.managerPrefabs.cameraManager_P);
-            Instantiate(ContentManager.Instance.prefabs.managerPrefabs.inputManager_P);
+            if (HelperFunctions.TryInstantiate(ContentManager.Instance.prefabs.managerPrefabs.pauseManager_P, out var pause, "PauseManager"))
+            {
+                ContentManager.Instance.RegisterManager(pause);
+            }
+            if (HelperFunctions.TryInstantiate(ContentManager.Instance.prefabs.managerPrefabs.uiManager_P, out var ui, "UIManager"))
+            {
+                ContentManager.Instance.RegisterManager(ui);
+            }
+            if (HelperFunctions.TryInstantiate(ContentManager.Instance.prefabs.managerPrefabs.playerManager_P, out var player, "PlayerManager"))
+            {
+                ContentManager.Instance.RegisterManager(player);
+            }
+            if (HelperFunctions.TryInstantiate(ContentManager.Instance.prefabs.managerPrefabs.cameraManager_P, out var camera, "CameraManager"))
+            {
+                ContentManager.Instance.RegisterManager(camera);
+            }
+            if (HelperFunctions.TryInstantiate(ContentManager.Instance.prefabs.managerPrefabs.inputManager_P, out var input, "InputManager"))
+            {
+                ContentManager.Instance.RegisterManager(input);
+            }
         }
 
         public void RestartScene(int? scene = null)

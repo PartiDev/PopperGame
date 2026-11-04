@@ -2,7 +2,8 @@
 {
     public enum CameraSetting
     {
-        FollowPlayer,
+        Static,
+        PlayerFollow,
         Cutscene
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace Assets.Scripts.Player
 {
+    using Assets.Scripts.Helpers;
     using Generic;
     using System.Collections.Generic;
     using System.Linq;
@@ -14,11 +15,18 @@
 
         private void Awake()
         {
-            ValueManager.Instance.RegisterManager<PlayerManager>(this);
-
-            _players = new List<Player>() {
-                Instantiate(_player_P, new Vector3(0, _playerHeight, 0), Quaternion.identity, this.transform)
-            };
+            _players = new List<Player>();
+            
+            if (HelperFunctions.TryInstantiate(
+                _player_P,
+                out Player player,
+                "Player",
+                new Vector3(0, _playerHeight, 0),
+                Quaternion.identity,
+                this.transform))
+            {
+                _players.Add(player);
+            }
         }
 
         public Player GetCurrentPlayer()

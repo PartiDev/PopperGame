@@ -17,7 +17,7 @@
 
         private PlayerState _playerState = PlayerState.Active;
 
-        private PauseManager _pauseManager => ValueManager.Instance.Pause;
+        private PauseManager _pauseManager => ContentManager.Instance.Pause;
 
         public PlayerState GetPlayerState()
         {
@@ -107,4 +107,4 @@
     }
 }
 
-public enum PlayerState { Active, Interacting, GameOver };
+public enum PlayerState { Active, GameOver };
